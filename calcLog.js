@@ -42,7 +42,7 @@ function handleInput(inputValue) {
     }
 
     if (inputValue.match(/[+*/=-]/)){
-        if (inputValue != '=') {operates = inputValue;}
+        if (inputValue != '=' && operates == '') {operates = inputValue;}
         if (inputValue == '=' && prbSlv) {return;}
         if (number1 == '') {
             number1 = calcDisplay.textContent;
@@ -52,18 +52,19 @@ function handleInput(inputValue) {
             //If operator selected to 3+3+3, then solve the first 3+3, but then keep the operator that was already selected, and set the num1 to the answer, instead of back to ""
             let tempOperator = "";
             let tempNum1 = "";
+            console.log(`operates ${operates}, input value ${inputValue}`)
             if (inputValue != '=') { 
-                tempOperator = operates;
+                tempOperator = inputValue;
                 tempNum1 = operate(number1, operates, number2);
             }
-            //console.log(`before operate: num1: ${number1} num2: ${number2}, operator: ${operates} counter: ${counter}`);
+            console.log(`before operate: num1: ${number1} num2: ${number2}, operator: ${operates} counter: ${counter}`);
             calcDisplay.textContent = operate(number1, operates, number2);
             trimDisplay();
             number1 = tempNum1;
             operates = tempOperator;
             number2 = '';  
 
-            //console.log(`after operate: num1: ${number1} num2: ${number2}, operator: ${operates} counter: ${counter}`);
+            console.log(`after operate: num1: ${number1} num2: ${number2}, operator: ${operates} counter: ${counter}`);
         }
         return;
     }
